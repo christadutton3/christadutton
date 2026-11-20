@@ -1,32 +1,32 @@
 /*
-  Look: a crossover of a literary weekly and a fashion-forward culture site.
-  - Literary: Caslon body text, centered masthead, double rules, drop cap, small caps.
-  - Fashion: high-contrast Didone display type, big italics, tight headlines,
-    tracked-out uppercase labels.
+  Look: a classic literary weekly with a light touch of a fashion-forward culture site.
+  - Literary (leading): cream paper, Caslon type throughout, centered masthead,
+    double rules, black drop cap, quiet color.
+  - Fashion (accent): big italic lead, tracked-out uppercase labels.
 */
 :root {
-  --bg: #e6e9d2;
-  --text: #161512;
-  --muted: #4f5244;
-  --rule: #b9bf9a;
-  --ink-rule: #161512;
-  --accent: #8a1c1c;
-  --placeholder-bg: #dce0c3;
-  --map-ink: #3d4230;
-  --display: "Playfair Display", "Didot", "Bodoni 72", Georgia, serif;
+  --bg: #f7f2e4;
+  --text: #1a1916;
+  --muted: #5f5b52;
+  --rule: #d9d0bb;
+  --ink-rule: #1a1916;
+  --accent: #9b1c1c;
+  --placeholder-bg: #efe8d5;
+  --map-ink: #3b3934;
+  --display: "Libre Caslon Display", "Big Caslon", "Libre Caslon Text", Georgia, serif;
   --body: "Libre Caslon Text", "Big Caslon", Georgia, "Times New Roman", serif;
   --label: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1d2016;
-    --text: #efede6;
-    --muted: #aaa79d;
-    --rule: #424832;
-    --ink-rule: #efede6;
+    --bg: #1c1b18;
+    --text: #efeadc;
+    --muted: #aca595;
+    --rule: #3e3b33;
+    --ink-rule: #efeadc;
     --accent: #e8857a;
-    --placeholder-bg: #262a1d;
-    --map-ink: #c9ccb8;
+    --placeholder-bg: #262420;
+    --map-ink: #cfc9b8;
   }
 }
 * { box-sizing: border-box; }
@@ -56,10 +56,10 @@ header {
 h1 {
   margin: 0;
   font-family: var(--display);
-  font-size: clamp(3rem, 13vw, 5.75rem);
-  font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  font-size: clamp(3rem, 13vw, 6rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.01em;
 }
 h1 a { color: inherit; text-decoration: none; }
 nav {
@@ -78,7 +78,7 @@ nav {
 }
 nav a { color: var(--muted); text-decoration: none; padding: 2px 0; }
 nav a:hover { color: var(--accent); }
-nav a[aria-current="page"] { color: var(--text); border-bottom: 2px solid var(--accent); }
+nav a[aria-current="page"] { color: var(--text); border-bottom: 1px solid var(--ink-rule); }
 
 /* ---------- Section heads ---------- */
 section { margin-bottom: 52px; }
@@ -92,7 +92,7 @@ h2 {
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--text);
 }
 h2::before, h2::after {
   content: "";
@@ -103,19 +103,19 @@ h2::before, h2::after {
 /* ---------- About ---------- */
 #about p { margin: 0 0 1.1em; }
 #about p:first-of-type {
-  font-family: var(--display);
+  font-family: var(--body);
   font-style: italic;
-  font-size: 1.6rem;
-  line-height: 1.3;
+  font-size: 1.45rem;
+  line-height: 1.4;
 }
 #about p:nth-of-type(2)::first-letter {
   float: left;
   margin: 0.06em 0.1em 0 0;
   font-family: var(--display);
-  font-weight: 900;
-  font-size: 4.4em;
+  font-weight: 400;
+  font-size: 4.6em;
   line-height: 0.8;
-  color: var(--accent);
+  color: var(--text);
 }
 
 /* ---------- Story lists ---------- */
@@ -133,10 +133,9 @@ h2::before, h2::after {
   display: block;
   color: var(--text);
   font-family: var(--display);
-  font-size: 1.45rem;
-  font-weight: 700;
+  font-size: 1.6rem;
+  font-weight: 400;
   line-height: 1.2;
-  letter-spacing: -0.01em;
   text-decoration: none;
 }
 .clips a:hover { color: var(--accent); }
@@ -153,7 +152,7 @@ h2::before, h2::after {
 .more {
   margin: 24px 0 0;
   text-align: center;
-  font-family: var(--display);
+  font-family: var(--body);
   font-style: italic;
   font-size: 1.1rem;
 }
@@ -176,9 +175,9 @@ footer {
   padding-top: 22px;
   border-top: 4px double var(--ink-rule);
   text-align: center;
-  font-family: var(--display);
+  font-family: var(--body);
   font-style: italic;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   color: var(--text);
 }
 
@@ -187,11 +186,10 @@ footer {
 h3 {
   margin: 0;
   font-family: var(--display);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
-  font-size: 2.1rem;
+  font-size: 2.2rem;
   line-height: 1.1;
-  letter-spacing: -0.01em;
 }
 .when {
   margin: 6px 0 10px;
@@ -220,10 +218,10 @@ h3 {
 .map-pins a:hover circle, .map-pins a:focus circle { r: 9; }
 .map-label {
   font-variant-numeric: lining-nums;
-  font-family: var(--display);
+  font-family: var(--body);
   font-style: italic;
-  font-size: 25px;
-  font-weight: 700;
+  font-size: 23px;
+  font-weight: 400;
   fill: var(--text);
   paint-order: stroke;
   stroke: var(--bg);
@@ -231,7 +229,7 @@ h3 {
   stroke-linejoin: round;
 }
 @media (max-width: 520px) {
-  .map-label { font-size: 31px; stroke-width: 8px; }
+  .map-label { font-size: 30px; stroke-width: 8px; }
   .map-pins circle { r: 9; }
 }
 .map-pins .pin { cursor: pointer; }
@@ -242,8 +240,8 @@ h3 {
   max-width: 280px;
   padding: 12px 16px;
   background: var(--bg);
-  border: 1px solid var(--ink-rule);
-  box-shadow: 4px 4px 0 var(--ink-rule);
+  border: 1px solid var(--rule);
+  box-shadow: 0 6px 20px rgba(40, 32, 16, 0.14);
   pointer-events: none;
   font-size: 0.85rem;
   line-height: 1.3;
@@ -251,7 +249,7 @@ h3 {
 .map-tip[hidden] { display: none; }
 .map-tip-city {
   margin: 0 0 8px;
-  color: var(--accent);
+  color: var(--muted);
   font-family: var(--label);
   font-size: 0.65rem;
   font-weight: 700;
@@ -259,6 +257,6 @@ h3 {
   text-transform: uppercase;
 }
 .map-tip ul { margin: 0; padding: 0; list-style: none; }
-.map-tip li { font-family: var(--display); font-weight: 700; font-size: 1.05em; }
+.map-tip li { font-family: var(--display); font-weight: 400; font-size: 1.15em; }
 .map-tip.compact { font-size: 0.75rem; padding: 8px 10px; }
 .map-tip li + li { margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--rule); }
