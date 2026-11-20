@@ -123,9 +123,9 @@ h3 {
 .map-pins circle { fill: var(--accent); stroke: var(--bg); stroke-width: 2.5; }
 .map-pins a:hover circle, .map-pins a:focus circle { r: 9; }
 .map-label {
-  font-family: Caveat, "Segoe Print", "Bradley Hand", cursive;
-  font-size: 30px;
-  font-weight: 600;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 23px;
+  font-weight: 700;
   fill: var(--text);
   paint-order: stroke;
   stroke: var(--bg);
@@ -139,6 +139,6 @@ h3 {
   font-size: 0.9rem;
 }
 @media (max-width: 520px) {
-  .map-label { font-size: 42px; stroke-width: 8px; }
+  .map-label { font-size: 33px; stroke-width: 8px; }
   .map-pins circle { r: 9; }
 }
