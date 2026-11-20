@@ -6,7 +6,6 @@
   --accent: #8a1c1c;
   --placeholder-bg: #dce0c3;
   --map-ink: #3d4230;
-  --map-visited: #8f9a5c;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -17,7 +16,6 @@
     --accent: #e07a6e;
     --placeholder-bg: #262a1d;
     --map-ink: #c9ccb8;
-    --map-visited: #7c8a52;
   }
 }
 * { box-sizing: border-box; }
@@ -114,8 +112,6 @@ h3 {
 }
 .map { margin: 0 0 36px; }
 .map svg { display: block; width: 100%; height: auto; }
-.map-states path.visited { fill: url(#hatch); }
-.hatch-line { stroke: var(--map-visited); stroke-width: 2.2; }
 .map-outline {
   fill: none;
   stroke: var(--map-ink);
