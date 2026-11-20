@@ -1,19 +1,30 @@
+/*
+  Look: a crossover of a literary weekly and a fashion-forward culture site.
+  - Literary: Caslon body text, centered masthead, double rules, drop cap, small caps.
+  - Fashion: high-contrast Didone display type, big italics, tight headlines,
+    tracked-out uppercase labels.
+*/
 :root {
   --bg: #e6e9d2;
-  --text: #1c1b19;
+  --text: #161512;
   --muted: #4f5244;
-  --rule: #c5cba8;
+  --rule: #b9bf9a;
+  --ink-rule: #161512;
   --accent: #8a1c1c;
   --placeholder-bg: #dce0c3;
   --map-ink: #3d4230;
+  --display: "Playfair Display", "Didot", "Bodoni 72", Georgia, serif;
+  --body: "Libre Caslon Text", "Big Caslon", Georgia, "Times New Roman", serif;
+  --label: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #1d2016;
-    --text: #eeece7;
-    --muted: #a8a49c;
-    --rule: #3b402d;
-    --accent: #e07a6e;
+    --text: #efede6;
+    --muted: #aaa79d;
+    --rule: #424832;
+    --ink-rule: #efede6;
+    --accent: #e8857a;
     --placeholder-bg: #262a1d;
     --map-ink: #c9ccb8;
   }
@@ -23,94 +34,179 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.125rem;
-  line-height: 1.6;
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: lining-nums;
 }
 main {
   max-width: 680px;
   margin: 0 auto;
-  padding: 64px 16px 80px;
+  padding: 56px 16px 80px;
 }
+
+/* ---------- Masthead ---------- */
 header {
-  border-bottom: 1px solid var(--rule);
-  padding-bottom: 28px;
-  margin-bottom: 40px;
+  text-align: center;
+  padding-bottom: 18px;
+  margin-bottom: 48px;
+  border-bottom: 4px double var(--ink-rule);
 }
 h1 {
   margin: 0;
-  font-size: clamp(2.75rem, 10vw, 4.5rem);
-  line-height: 1.1;
-  letter-spacing: -0.01em;
+  font-family: var(--display);
+  font-size: clamp(3rem, 13vw, 5.75rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
 }
-section { margin-bottom: 44px; }
+h1 a { color: inherit; text-decoration: none; }
+nav {
+  margin-top: 22px;
+  padding-top: 12px;
+  border-top: 1px solid var(--ink-rule);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px 28px;
+  font-family: var(--label);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+nav a { color: var(--muted); text-decoration: none; padding: 2px 0; }
+nav a:hover { color: var(--accent); }
+nav a[aria-current="page"] { color: var(--text); border-bottom: 2px solid var(--accent); }
+
+/* ---------- Section heads ---------- */
+section { margin-bottom: 52px; }
 h2 {
-  margin: 0 0 14px;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 28px;
+  font-family: var(--label);
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--accent);
 }
-.placeholder {
-  margin: 0;
-  padding: 16px 18px;
-  border: 1px dashed var(--rule);
-  border-radius: 6px;
-  background: var(--placeholder-bg);
-  color: var(--muted);
-  font-style: italic;
+h2::before, h2::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid var(--ink-rule);
 }
+
+/* ---------- About ---------- */
+#about p { margin: 0 0 1.1em; }
+#about p:first-of-type {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.6rem;
+  line-height: 1.3;
+}
+#about p:nth-of-type(2)::first-letter {
+  float: left;
+  margin: 0.06em 0.1em 0 0;
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 4.4em;
+  line-height: 0.8;
+  color: var(--accent);
+}
+
+/* ---------- Story lists ---------- */
 .clips {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 .clips li {
-  padding: 14px 0;
+  padding: 18px 0 20px;
   border-bottom: 1px solid var(--rule);
 }
-.clips a { color: var(--text); font-weight: 700; }
+.clips li:first-child { padding-top: 4px; }
+.clips a {
+  display: block;
+  color: var(--text);
+  font-family: var(--display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+.clips a:hover { color: var(--accent); }
 .clips .meta {
   display: block;
+  margin-top: 8px;
   color: var(--muted);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  font-size: 0.9rem;
+  font-family: var(--label);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
-.more { margin: 20px 0 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-size: 0.95rem; }
-a { color: var(--accent); text-underline-offset: 3px; }
+.more {
+  margin: 24px 0 0;
+  text-align: center;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+a { color: var(--accent); text-underline-offset: 3px; text-decoration-thickness: 1px; }
 a:hover { text-decoration-thickness: 2px; }
-footer {
-  border-top: 1px solid var(--rule);
-  padding-top: 24px;
+
+.placeholder {
+  margin: 0;
+  padding: 16px 18px;
+  border: 1px dashed var(--rule);
+  background: var(--placeholder-bg);
   color: var(--muted);
+  font-style: italic;
 }
-nav {
-  margin-top: 14px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 20px;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  font-size: 0.95rem;
+
+/* ---------- Footer ---------- */
+footer {
+  margin-top: 8px;
+  padding-top: 22px;
+  border-top: 4px double var(--ink-rule);
+  text-align: center;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--text);
 }
-nav a { color: var(--muted); text-decoration: none; }
-nav a:hover { color: var(--accent); }
-nav a[aria-current="page"] { color: var(--text); font-weight: 700; }
-h1 a { color: inherit; text-decoration: none; }
-.trip { margin-bottom: 36px; }
+
+/* ---------- Datelines ---------- */
+.trip { margin-bottom: 44px; }
 h3 {
   margin: 0;
-  font-size: 1.5rem;
-  line-height: 1.25;
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 2.1rem;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
 }
 .when {
-  margin: 2px 0 6px;
+  margin: 6px 0 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--ink-rule);
   color: var(--muted);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  font-size: 0.95rem;
+  font-family: var(--label);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
-.map { margin: 0 0 36px; position: relative; }
+
+/* ---------- Map ---------- */
+.map { margin: 0 0 48px; position: relative; }
 .map svg { display: block; width: 100%; height: auto; }
 .map-outline {
   fill: none;
@@ -123,8 +219,10 @@ h3 {
 .map-pins circle { fill: var(--accent); stroke: var(--bg); stroke-width: 2.5; }
 .map-pins a:hover circle, .map-pins a:focus circle { r: 9; }
 .map-label {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 23px;
+  font-variant-numeric: lining-nums;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 25px;
   font-weight: 700;
   fill: var(--text);
   paint-order: stroke;
@@ -132,14 +230,8 @@ h3 {
   stroke-width: 6px;
   stroke-linejoin: round;
 }
-.map figcaption {
-  margin-top: 8px;
-  color: var(--muted);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  font-size: 0.9rem;
-}
 @media (max-width: 520px) {
-  .map-label { font-size: 33px; stroke-width: 8px; }
+  .map-label { font-size: 31px; stroke-width: 8px; }
   .map-pins circle { r: 9; }
 }
 .map-pins .pin { cursor: pointer; }
@@ -148,26 +240,25 @@ h3 {
   position: absolute;
   z-index: 2;
   max-width: 280px;
-  padding: 10px 14px;
+  padding: 12px 16px;
   background: var(--bg);
-  border: 1px solid var(--map-ink);
-  border-radius: 4px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--ink-rule);
+  box-shadow: 4px 4px 0 var(--ink-rule);
   pointer-events: none;
   font-size: 0.85rem;
-  line-height: 1.35;
+  line-height: 1.3;
 }
 .map-tip[hidden] { display: none; }
 .map-tip-city {
-  margin: 0 0 6px;
+  margin: 0 0 8px;
   color: var(--accent);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  font-size: 0.75rem;
+  font-family: var(--label);
+  font-size: 0.65rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 .map-tip ul { margin: 0; padding: 0; list-style: none; }
-.map-tip li { font-weight: 700; }
+.map-tip li { font-family: var(--display); font-weight: 700; font-size: 1.05em; }
 .map-tip.compact { font-size: 0.75rem; padding: 8px 10px; }
-.map-tip li + li { margin-top: 5px; padding-top: 5px; border-top: 1px solid var(--rule); }
+.map-tip li + li { margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--rule); }
