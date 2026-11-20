@@ -143,14 +143,37 @@
         heads.forEach(function (t) { var li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
         tip.appendChild(ul);
         tip.hidden = false;
-        var m = map.getBoundingClientRect(), r = pin.querySelector('circle').getBoundingClientRect();
-        var x = r.left + r.width / 2 - m.left, y = r.top - m.top;
-        var w = tip.offsetWidth, hgt = tip.offsetHeight;
-        var left = Math.min(Math.max(x - w / 2, 0), m.width - w);
-        var top = y - hgt - 10;
-        if (top < 0) top = r.bottom - m.top + 10;
-        tip.style.left = left + 'px';
-        tip.style.top = top + 'px';
+        place(pin);
+      }
+      // Put the box beside the pin (right, left, below or above), whichever fits
+      // inside the map. If it doesn't fit anywhere, shrink the text and clamp it to the map.
+      function place(pin) {
+        var gap = 12;
+        var m = map.querySelector('svg').getBoundingClientRect(), f = map.getBoundingClientRect();
+        var r = pin.querySelector('circle').getBoundingClientRect();
+        var W = m.width, H = m.height;
+        var px = r.left + r.width / 2 - m.left, py = r.top + r.height / 2 - m.top;
+        tip.classList.remove('compact');
+        tip.style.maxWidth = Math.min(280, W - 8) + 'px';
+        function clamp(v, lo, hi) { return Math.max(lo, Math.min(v, hi)); }
+        function tryPlace() {
+          var w = tip.offsetWidth, h = tip.offsetHeight, opts = [
+            { ok: px + gap + w <= W && h <= H, x: px + gap, y: clamp(py - h / 2, 0, H - h) },
+            { ok: px - gap - w >= 0 && h <= H, x: px - gap - w, y: clamp(py - h / 2, 0, H - h) },
+            { ok: py + gap + h <= H && w <= W, x: clamp(px - w / 2, 0, W - w), y: py + gap },
+            { ok: py - gap - h >= 0 && w <= W, x: clamp(px - w / 2, 0, W - w), y: py - gap - h }
+          ];
+          for (var i = 0; i < opts.length; i++) if (opts[i].ok) return opts[i];
+          return null;
+        }
+        var spot = tryPlace();
+        if (!spot) { tip.classList.add('compact'); spot = tryPlace(); }
+        if (!spot) {
+          var w = tip.offsetWidth, h = tip.offsetHeight;
+          spot = { x: clamp(px - w / 2, 0, Math.max(0, W - w)), y: clamp(py - h / 2, 0, Math.max(0, H - h)) };
+        }
+        tip.style.left = (spot.x + m.left - f.left) + 'px';
+        tip.style.top = (spot.y + m.top - f.top) + 'px';
       }
       function hide() { tip.hidden = true; }
       map.querySelectorAll('.pin').forEach(function (pin) {

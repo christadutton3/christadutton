@@ -169,4 +169,5 @@ h3 {
 }
 .map-tip ul { margin: 0; padding: 0; list-style: none; }
 .map-tip li { font-weight: 700; }
+.map-tip.compact { font-size: 0.75rem; padding: 8px 10px; }
 .map-tip li + li { margin-top: 5px; padding-top: 5px; border-top: 1px solid var(--rule); }
